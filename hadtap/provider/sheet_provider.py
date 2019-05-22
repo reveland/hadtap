@@ -3,7 +3,7 @@ import ast
 import logging
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
-from kalandor.provider.provider import Provider
+from hadtap.provider.provider import Provider
 
 logger = logging.getLogger(__name__)
 

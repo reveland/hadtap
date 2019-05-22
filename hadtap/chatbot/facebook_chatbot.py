@@ -1,7 +1,7 @@
 import os
 import json
 import requests
-from kalandor.chatbot.chatbot import ChatBot
+from hadtap.chatbot.chatbot import ChatBot
 
 
 class FacebookChatBot(ChatBot):

@@ -2,7 +2,7 @@ import logging
 import os
 import requests
 import json
-from kalandor.chatbot.chatbot import ChatBot
+from hadtap.chatbot.chatbot import ChatBot
 
 logger = logging.getLogger(__name__)
 
