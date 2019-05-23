@@ -43,7 +43,8 @@ def telegram_hook():
         logger.info('Telegram message receive from %s: %s',
                     message['user_id'], message['text'])
         # this is a chat_id not an user_id, telegram stuff
-        answer = message_handler.handle(
+        answer = {}
+        answer['text'] = message_handler.handle(
             message['user_id'], message['text'])
         logger.info('Telegram answer send to %s', message['user_id'])
         logger.debug('%s', answer)

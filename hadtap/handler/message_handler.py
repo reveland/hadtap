@@ -25,3 +25,4 @@ class MessageHandler(Handler):
             logger.debug('record value for user: %s, %s', value, user_name)
             self.sheet_provider.record_fogyasztas(user_name, value)
             logger.info('fogyasztas recorded for %s: %s', user_id, value)
+            return 'done.'
