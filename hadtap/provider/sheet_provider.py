@@ -31,21 +31,27 @@ class SheetProvider(Provider):
         return self.fogyasztas_sheet.row_values(1)
 
     def get_user_ids(self):
-        return self.user_sheet.col_values(1)
+        ids = self.user_sheet.col_values(2)
+        logger.debug('user_ids: %s', ids)
+        return ids
 
     def record_fogyasztas(self, user_name, value):
+        logger.debug('record for %s: %s', user_name, value)
         col_ = self.fogyasztas_sheet.find(user_name).col
         self.fogyasztas_sheet.col_values(col_)
         row_ = len(self.fogyasztas_sheet.col_values(col_))
-        self.fogyasztas_sheet.update_cell(row_, col_, value)
+        logger.debug('update cell: %s, %s to %s', row_, col_, value)
+        self.fogyasztas_sheet.update_cell(row_ + 1, col_, value)
 
     def get_value_for_item(self, item):
         try:
-            item = self.item_sheet.find('csoki')
-            return self.item_sheet.cell(item.col, 2)
+            item_cell = self.item_sheet.find(item)
+            return self.item_sheet.cell(item_cell.row, 2).value
         except:
             return None
 
     def get_name(self, user_id):
-        user = self.item_sheet.find(user_id)
-        return self.item_sheet.cell(user.col, 2)
+        user_cell = self.user_sheet.find(str(user_id))
+        user_name = self.user_sheet.cell(user_cell.row, 1).value
+        logger.debug('got name for id: %s, %s', user_name, user_id)
+        return user_name

@@ -14,12 +14,14 @@ class MessageHandler(Handler):
 
     def handle(self, user_id, message):
         if user_id not in self.sheet_provider.get_user_ids():
+            logger.debug('user not found: %s', user_id)
             # return self.newcomer_handler.handle(user_id, message)
             pass
         else:
             value = self.sheet_provider.get_value_for_item(message)
             if value is None:
-                return 'sry bro: %s nincs a listán', message
+                return 'Nincs ilyen arucikk.'
             user_name = self.sheet_provider.get_name(user_id)
-            self.record_fogyasztas(user_name, value)
+            logger.debug('record value for user: %s, %s', value, user_name)
+            self.sheet_provider.record_fogyasztas(user_name, value)
             logger.info('fogyasztas recorded for %s: %s', user_id, value)

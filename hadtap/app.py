@@ -19,9 +19,11 @@ message_handler = MessageHandler()
 @app.route('/chat/')
 def chat():
     message = request.args.get('message')
+    logger.debug('local receive request: %s', message)
     answer = ''
     if message is not None:
-        answer = message_handler.handle('local', message)
+        answer = message_handler.handle('547578996', message)
+    logger.debug('local answer: %s', answer)
     form = """
             <form action="/chat">
                 <input type="text" name="message"><br>
