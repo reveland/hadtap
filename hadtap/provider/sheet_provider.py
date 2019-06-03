@@ -55,3 +55,7 @@ class SheetProvider(Provider):
         user_name = self.user_sheet.cell(user_cell.row, 1).value
         logger.debug('got name for id: %s, %s', user_name, user_id)
         return user_name
+
+    def add_newcomer(self, user_name, user_id):
+        logger.debug('add newcomer: %s, %s', user_id, user_name)
+        self.user_sheet.append_row([user_name, user_id])

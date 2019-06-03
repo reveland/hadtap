@@ -2,9 +2,13 @@ from flask import Flask, request, Response
 import json
 import logging.config
 import os
+import sys
 
 from hadtap.chatbot.telegram_chatbot import TelegramChatBot
 from hadtap.handler.message_handler import MessageHandler
+
+reload(sys)
+sys.setdefaultencoding('UTF8')
 
 with open('log_config.json', 'r') as log_config_json:
     log_config_dict = json.load(log_config_json)
