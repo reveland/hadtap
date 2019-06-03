@@ -38,10 +38,11 @@ class SheetProvider(Provider):
     def record_fogyasztas(self, user_name, value):
         logger.debug('record for %s: %s', user_name, value)
         col_ = self.fogyasztas_sheet.find(user_name).col
-        self.fogyasztas_sheet.col_values(col_)
-        row_ = len(self.fogyasztas_sheet.col_values(col_))
+        fogyasztasok = self.fogyasztas_sheet.col_values(col_)
+        row_ = len(fogyasztasok)
         logger.debug('update cell: %s, %s to %s', row_, col_, value)
         self.fogyasztas_sheet.update_cell(row_ + 1, col_, value)
+        return fogyasztasok[3]
 
     def get_value_for_item(self, item):
         try:

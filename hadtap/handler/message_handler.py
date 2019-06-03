@@ -24,8 +24,8 @@ class MessageHandler(Handler):
                     return 'Nincs ilyen arucikk.'
                 user_name = self.sheet_provider.get_name(user_id)
                 logger.debug('record value for user: %s, %s', value, user_name)
-                self.sheet_provider.record_fogyasztas(user_name, value)
+                summ = self.sheet_provider.record_fogyasztas(user_name, value)
                 logger.info('fogyasztas recorded for %s: %s', user_id, value)
-                return 'done.'
+                return 'ok, az eddigi fogyasztasod: %s' % summ
             except CellNotFound:
                 return 'Valoszinuleg rossz nevet adtal meg, szolj Revinek.'
