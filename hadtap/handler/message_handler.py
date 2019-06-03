@@ -14,6 +14,8 @@ class MessageHandler(Handler):
         self.newcomer_handler = NewcomerHandler(self.sheet_provider)
 
     def handle(self, user_id, message):
+        if message[0] == '/':
+            message = message[1:].split('@')[0][:-1]
         if user_id not in self.sheet_provider.get_user_ids():
             logger.debug('user not found: %s', user_id)
             return self.newcomer_handler.handle(user_id, message)
