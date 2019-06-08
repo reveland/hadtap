@@ -66,7 +66,7 @@ class TelegramChatBot(ChatBot):
             logger.debug("%s, %s, %s", r.status_code, r.reason, r.content)
 
     def create_button(self, option):
-        return [{'text': option.split('-')[-1], 'callback_data': option}]
+        return [{'text': option, 'callback_data': option.split('-')[-2]}]
 
     def create_keyboard(self, options):
         buttons = list(map(self.create_button, options))
