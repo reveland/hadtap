@@ -51,6 +51,9 @@ class SheetProvider(Provider):
         except:
             return None
 
+    def get_items(self):
+        return self.item_sheet.col_values(1)
+
     def get_name(self, user_id):
         user_cell = self.user_sheet.find(str(user_id))
         user_name = self.user_sheet.cell(user_cell.row, 1).value

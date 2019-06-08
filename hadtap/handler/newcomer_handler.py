@@ -12,7 +12,12 @@ class NewcomerHandler(Handler):
     def handle(self, user_id, message):
         names = self.provider.get_names()
         if message not in names:
-            return 'Szia, mi a neved?'
+            return self.make_answer('Szia, mi a neved?')
         else:
             self.provider.add_newcomer(message, user_id)
-            return 'Szuper, koszi'
+            return self.make_answer('Szuper, koszi')
+
+    def make_answer(self, text):
+        answer = {}
+        answer['text'] = text
+        return answer

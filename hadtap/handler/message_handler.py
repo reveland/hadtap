@@ -23,18 +23,20 @@ class MessageHandler(Handler):
             try:
                 value = self.sheet_provider.get_value_for_item(message)
                 if value is None:
-                    return 'Nincs ilyen arucikk.'
+                    return self.make_answer('Nincs ilyen arucikk.')
                 user_name = self.sheet_provider.get_name(user_id)
                 logger.debug('record value for user: %s, %s', value, user_name)
                 summ = self.sheet_provider.record_fogyasztas(user_name, value)
                 logger.info('fogyasztas recorded for %s: %s', user_id, value)
                 text = 'ok, az eddigi fogyasztasod: %s' % summ
-                return self.make_answer(text)
+                options = self.sheet_provider.get_items()
+                return self.make_answer(text, options)
             except CellNotFound:
                 text = 'Valoszinuleg rossz nevet adtal meg, szolj Revinek.'
                 return self.make_answer(text)
 
-    def make_answer(self, text):
+    def make_answer(self, text, options=None):
         answer = {}
         answer['text'] = text
+        answer['options'] = options
         return answer
