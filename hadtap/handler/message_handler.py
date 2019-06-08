@@ -28,6 +28,13 @@ class MessageHandler(Handler):
                 logger.debug('record value for user: %s, %s', value, user_name)
                 summ = self.sheet_provider.record_fogyasztas(user_name, value)
                 logger.info('fogyasztas recorded for %s: %s', user_id, value)
-                return 'ok, az eddigi fogyasztasod: %s' % summ
+                text = 'ok, az eddigi fogyasztasod: %s' % summ
+                return self.make_answer(text)
             except CellNotFound:
-                return 'Valoszinuleg rossz nevet adtal meg, szolj Revinek.'
+                text = 'Valoszinuleg rossz nevet adtal meg, szolj Revinek.'
+                return self.make_answer(text)
+
+    def make_answer(self, text):
+        answer = {}
+        answer['text'] = text
+        return answer
