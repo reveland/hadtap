@@ -42,7 +42,7 @@ class SheetProvider(Provider):
         row_ = len(fogyasztasok)
         logger.debug('update cell: %s, %s to %s', row_, col_, value)
         self.fogyasztas_sheet.update_cell(row_ + 1, col_, value)
-        return fogyasztasok[3]
+        return int(fogyasztasok[3]) + int(value)
 
     def get_value_for_item(self, item):
         try:
