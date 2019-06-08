@@ -52,7 +52,9 @@ class SheetProvider(Provider):
             return None
 
     def get_items(self):
-        return self.item_sheet.col_values(1)
+        names = self.item_sheet.col_values(1)
+        values = self.item_sheet.col_values(2)
+        return list(map(lambda x: '-'.join(x), zip(names, values)))
 
     def get_name(self, user_id):
         user_cell = self.user_sheet.find(str(user_id))
