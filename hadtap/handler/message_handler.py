@@ -20,6 +20,7 @@ class MessageHandler(Handler):
             logger.debug('user not found: %s', user_id)
             return self.newcomer_handler.handle(user_id, message)
         else:
+            self.sheet_provider.record_action(user_id, message)
             try:
                 value = self.sheet_provider.get_value_for_item(message)
                 if value is None:

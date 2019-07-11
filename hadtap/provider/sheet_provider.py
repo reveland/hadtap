@@ -65,3 +65,10 @@ class SheetProvider(Provider):
     def add_newcomer(self, user_name, user_id):
         logger.debug('add newcomer: %s, %s', user_id, user_name)
         self.user_sheet.append_row([user_name, user_id])
+
+    def record_action(self, user_id, action):
+        row_index = self.user_sheet.find(user_id).row
+        actions = self.user_sheet.cell(row_index, 3).value
+        updated_actions = actions + '#' + action
+        self.user_sheet.update_cell(row_index, 3, updated_actions)
+        logger.info('action recorded for %s: %s', user_id, action)
